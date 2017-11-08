@@ -10,7 +10,7 @@ interface hasAverage{
 interface hasSeries{
     int getLongestSerieSize();
 }
-class Row implements hasAverage,hasSeries{
+class Row implements hasAverage, hasSeries{
     int sum=0;
     int[] data={};
     int length=0;
@@ -121,6 +121,7 @@ class Matrix{
         return new String(sb);
     }
 }
+
 public class Main {
     private static int[] solveFirstTask(int[] array){
         int p=0;
