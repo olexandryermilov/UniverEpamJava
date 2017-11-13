@@ -1,9 +1,7 @@
 package com.vehiclesworld;
 
-import sun.plugin2.gluegen.runtime.CPU;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
@@ -23,6 +21,12 @@ public class Main {
             default:return null;
         }
     }
+    /*
+    1. механизмы с наименьшей ценой с наибольшей скоростью и не старше 5 лет
+    найти из механизмов Plane c с высотой полета выше 5000 с годом выпуска после 2000
+     найти механизмы с максимальной скоростью в диапазоне 200 - 500, но не Plane
+     добавить к данной иерархии машину-амфибию, и БетМобиль, создать 3 масива сгупированых по Интерфейсам Flyable, MoveAble, SwimAble
+     */
     public static void main(String[] args) {
         CVehicle[] arr = new CVehicle[10];
         for (int i = 0; i < arr.length; i++) {
