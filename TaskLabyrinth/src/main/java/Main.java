@@ -44,21 +44,21 @@ public class Main {
         }
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(arr[i][j]=='*')a[i][j].setCameAt(-1);
-                else if(arr[i][j]=='.')a[i][j].setCameAt(0);
+                if(arr[i][j]=='*')a[i+1][1+j].setCameAt(-1);
+                else if(arr[i][j]=='.')a[1+i][j+1].setCameAt(0);
                 else if(arr[i][j]=='X'){
-                    a[i][j].setCameAt(1);
+                    a[i+1][j+1].setCameAt(1);
                     if(begin==null){
-                        begin = new Point(i,j);
+                        begin = new Point(i+1,j+1);
                     }
                     else{
                         throw new RuntimeException("Input has more than one begin point");
                     }
                 }
                 else if(arr[i][j]=='@'){
-                    a[i][j].setCameAt(0);
+                    a[i+1][j+1].setCameAt(0);
                     if(finish==null){
-                        finish=new Point(i,j);
+                        finish=new Point(i+1,j+1);
                     }
                     else{
                         throw new RuntimeException("Input has more than one finish point");
@@ -96,5 +96,13 @@ public class Main {
     }
     public static void main(String args[]){
         Scanner in = new Scanner(System.in);
+        int n,m;
+        n = in.nextInt();
+        m=in.nextInt();
+        char[][] lab = new char[n][m];
+        for(int i=0;i<n;i++){
+            lab[i]=in.next("\n").toCharArray();
+        }
+        System.out.println(findPath(lab));
     }
 }
