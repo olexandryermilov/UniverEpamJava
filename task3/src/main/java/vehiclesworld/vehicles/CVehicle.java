@@ -1,4 +1,4 @@
-package vehiclesworld;
+package vehiclesworld.vehicles;
 
 public abstract class CVehicle {
     private int x,y,cost,speed,year;
@@ -47,5 +47,14 @@ public abstract class CVehicle {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "CVehicle{" +
+                "cost=" + cost +
+                ", speed=" + speed +
+                ", year=" + year +
+                '}';
     }
 }

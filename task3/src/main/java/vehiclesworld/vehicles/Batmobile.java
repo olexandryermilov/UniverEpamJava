@@ -1,4 +1,4 @@
-package vehiclesworld;
+package vehiclesworld.vehicles;
 
 public class Batmobile extends CVehicle implements Flyable,Moveable,Swimable {
     public Batmobile(int cost, int speed, int year) {

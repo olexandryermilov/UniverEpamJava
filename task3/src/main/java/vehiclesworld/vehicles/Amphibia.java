@@ -1,4 +1,4 @@
-package vehiclesworld;
+package vehiclesworld.vehicles;
 
 public class Amphibia extends CVehicle implements Swimable,Moveable {
     public Amphibia(int cost, int speed, int year) {

@@ -1,4 +1,4 @@
-package vehiclesworld;
+package vehiclesworld.vehicles;
 
 public class CPlane extends CVehicle implements Flyable{
     private int passengers;

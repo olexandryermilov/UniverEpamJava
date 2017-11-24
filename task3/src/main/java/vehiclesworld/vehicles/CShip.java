@@ -1,4 +1,4 @@
-package vehiclesworld;
+package vehiclesworld.vehicles;
 
 public class CShip extends CVehicle implements Swimable{
     private int passengers;
