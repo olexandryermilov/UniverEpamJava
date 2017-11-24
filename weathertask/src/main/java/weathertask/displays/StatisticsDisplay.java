@@ -1,6 +1,6 @@
 package weathertask.displays;
 
-import weathertask.WeatherObserver;
+import weathertask.weatherstation.WeatherObserver;
 
 public class StatisticsDisplay implements WeatherObserver {
     private double sumTemperature, sumHumidity,sumPressure;
@@ -31,9 +31,9 @@ public class StatisticsDisplay implements WeatherObserver {
     @Override
     public String toString() {
         return "StatisticsDisplay:" +
-                "sumTemperature=" + sumTemperature +
-                ", sumHumidity=" + sumHumidity +
-                ", sumPressure=" + sumPressure +
+                "averageTemperature=" + sumTemperature/count +
+                ", averageHumidity=" + sumHumidity/count +
+                ", averagePressure=" + sumPressure/count +
                 ", count=" + count ;
     }
 }

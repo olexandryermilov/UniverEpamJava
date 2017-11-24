@@ -1,7 +1,5 @@
 package weathertask.weatherstation;
 
-import weathertask.Subject;
-import weathertask.WeatherObserver;
 import weathertask.apiwork.APIAdapter;
 import weathertask.displays.CurrentConditionsDisplay;
 import weathertask.displays.ForecastDisplay;

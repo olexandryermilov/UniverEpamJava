@@ -1,6 +1,6 @@
 package weathertask.displays;
 
-import weathertask.WeatherObserver;
+import weathertask.weatherstation.WeatherObserver;
 
 public class CurrentConditionsDisplay implements Display, WeatherObserver {
     private double currentTemperature, currentHumidity, currentPressure;
