@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+ooptask,taxcalculator,Calculator,155,0,2,0,43,0,12,0,11,0
+ooptask,taxcalculator,TaxAggregator,61,0,0,0,16,0,8,0,8,0
+ooptask,taxes,PercentTax,0,14,0,0,0,4,0,2,0,2
+ooptask,taxes,Tax,0,3,0,0,0,1,0,1,0,1
+ooptask,taxes,TransferTax,0,4,0,0,0,2,0,1,0,1
+ooptask,taxes,SoldRealEstateTax,0,4,0,0,0,2,0,1,0,1
+ooptask,taxes,IncomeTax,0,11,0,2,0,3,0,2,0,1
+ooptask,taxes,CarTax,0,4,0,0,0,2,0,1,0,1
+ooptask,taxes,AuthorTax,0,4,0,0,0,2,0,1,0,1
+ooptask,taxes,GiftTax,0,4,0,0,0,2,0,1,0,1
+ooptask,taxes,ValueTax,0,9,0,0,0,4,0,2,0,2

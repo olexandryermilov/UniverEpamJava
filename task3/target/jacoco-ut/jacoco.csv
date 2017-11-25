@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+task3,vehiclesworld.Fabrics,VehiclesFabric,13,12,5,1,6,4,6,2,1,2
+task3,vehiclesworld.Fabrics,CCarFabric,3,22,0,0,1,3,1,2,1,2
+task3,vehiclesworld.Fabrics,CPlaneFabric,3,32,0,0,1,5,1,2,1,2
+task3,vehiclesworld.Fabrics,AmphibiaFabric,3,22,0,0,1,2,1,2,1,2
+task3,vehiclesworld.Fabrics,CShipFabric,3,28,0,0,1,3,1,2,1,2
+task3,vehiclesworld.Fabrics,BatmobileFabric,3,22,0,0,1,3,1,2,1,2
+task3,vehiclesworld.vehicles,CCar,0,9,0,0,0,3,0,2,0,2
+task3,vehiclesworld.vehicles,Batmobile,0,15,0,0,0,5,0,4,0,4
+task3,vehiclesworld.vehicles,CPlane,8,21,0,0,4,7,2,4,2,4
+task3,vehiclesworld.vehicles,Amphibia,0,12,0,0,0,4,0,3,0,3
+task3,vehiclesworld.vehicles,CVehicle,48,21,0,0,13,8,8,4,8,4
+task3,vehiclesworld.vehicles,CShip,11,18,0,0,5,6,3,3,3,3
+task3,vehiclesworld,MyRandom,0,25,0,2,0,6,0,4,0,3
+task3,vehiclesworld,Main,468,0,74,0,71,0,47,0,10,0

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Calculator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ooptask</a> &gt; <a href="index.source.html" class="el_package">taxcalculator</a> &gt; <span class="el_source">Calculator.java</span></div><h1>Calculator.java</h1><pre class="source lang-java linenums">package taxcalculator;
+
+import taxes.*;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+/*
+<span class="nc" id="L8">1.	Определить множество и сумму налоговых выплат физического лица за год с учетом доходов с основного</span>
+ и дополнительного мест работы, авторских вознаграждений, продажи имущества,
+  получения в подарок денежных сумм и имущества, переводов из-за границы, льгот на детей и материальную помощь.
+   Провести сортировку налогов по сумме.
+<span class="nc" id="L12"> */</span>
+<span class="nc" id="L13">public class Calculator {</span>
+<span class="nc" id="L14">    private static TaxAggregator taxAggregator;</span>
+<span class="nc" id="L15">    private static ArrayList&lt;Tax&gt; taxes;</span>
+<span class="nc" id="L16">    private static double calculateTaxes(){</span>
+<span class="nc" id="L17">        double sumOfTaxes = 0;</span>
+<span class="nc" id="L18">        taxes = new ArrayList&lt;Tax&gt;();</span>
+<span class="nc" id="L19">        sumOfTaxes+=getMainIncomeTax();</span>
+<span class="nc" id="L20">        sumOfTaxes+=getAdditionalIncomeTax();</span>
+<span class="nc" id="L21">        sumOfTaxes+=getAuthorTax();</span>
+        sumOfTaxes+=getGiftTax();
+        sumOfTaxes+=getSoldRealEstateTax();
+<span class="nc" id="L24">        sumOfTaxes+=getTransferTax();</span>
+<span class="nc" id="L25">        sumOfTaxes+=getCarTax();</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        return sumOfTaxes;</span>
+<span class="nc" id="L27">    }</span>
+    private static int readPositiveInteger(){
+<span class="nc" id="L29">        Scanner in = new Scanner(System.in);</span>
+        int value = -1;
+        while(value&lt;0){
+<span class="nc" id="L32">            value=in.nextInt();</span>
+<span class="nc" id="L33">        }</span>
+<span class="nc" id="L34">        return value;</span>
+<span class="nc" id="L35">    }</span>
+    private static double getMainIncomeTax(){
+        System.out.println(&quot;Please, enter your main income:&quot;);
+<span class="nc" id="L38">        Tax tax = taxAggregator.getMainIncomeTax();</span>
+<span class="nc" id="L39">        taxes.add(tax);</span>
+<span class="nc" id="L40">        return ((IncomeTax)tax).getMoneyToPay(readPositiveInteger());</span>
+<span class="nc" id="L41">    }</span>
+    private static double getAdditionalIncomeTax(){
+        System.out.println(&quot;Please, enter summary income from your additional sources:&quot;);
+<span class="nc" id="L44">        Tax tax = taxAggregator.getAdditionalIncomeTax();</span>
+<span class="nc" id="L45">        taxes.add(tax);</span>
+<span class="nc" id="L46">        return ((IncomeTax)tax).getMoneyToPay(readPositiveInteger());</span>
+<span class="nc" id="L47">    }</span>
+    private static double getAuthorTax(){
+        System.out.println(&quot;Please, enter your incomes from author works:&quot;);
+<span class="nc" id="L50">        Tax tax = taxAggregator.getAuthorTax();</span>
+<span class="nc" id="L51">        taxes.add(tax);</span>
+<span class="nc" id="L52">        return ((AuthorTax)tax).getMoneyToPay(readPositiveInteger());</span>
+<span class="nc" id="L53">    }</span>
+    private static double getCarTax(){
+        System.out.println(&quot;Please, enter your amount of cars:&quot;);
+<span class="nc" id="L56">        Tax tax = taxAggregator.getCarTax();</span>
+<span class="nc" id="L57">        taxes.add(tax);</span>
+<span class="nc" id="L58">        return readPositiveInteger()*((CarTax)tax).getValueToPay();</span>
+<span class="nc" id="L59">    }</span>
+    private static double getGiftTax(){
+        System.out.println(&quot;Please, enter your sum of gifts:&quot;);
+<span class="nc" id="L62">        Tax tax = taxAggregator.getGiftTax();</span>
+<span class="nc" id="L63">        taxes.add(tax);</span>
+        return ((GiftTax)tax).getMoneyToPay(readPositiveInteger());
+    }
+<span class="nc" id="L66">    private static double getSoldRealEstateTax(){</span>
+<span class="nc" id="L67">        System.out.println(&quot;Please, enter your income from selling real estate&quot;);</span>
+        return taxAggregator.getRealEstateTax().getMoneyToPay(readPositiveInteger());
+    }
+<span class="nc" id="L70">    private static double getTransferTax(){</span>
+<span class="nc" id="L71">        System.out.println(&quot;Please, enter your income from taxes:&quot;);</span>
+<span class="nc" id="L72">        return taxAggregator.getTransferTax().getMoneyToPay(readPositiveInteger());</span>
+    }
+    public static void main(String[] args){
+        taxAggregator = new TaxAggregator();
+        System.out.println(calculateTaxes());
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

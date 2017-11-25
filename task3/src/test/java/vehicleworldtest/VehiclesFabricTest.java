@@ -1,9 +1,7 @@
 package vehicleworldtest;
 
-import org.junit.Before;
 import org.junit.Test;
-import vehiclesworld.VehiclesFabric;
-import vehiclesworld.vehicles.CVehicle;
+import vehiclesworld.Fabrics.VehiclesFabric;
 
 import static org.junit.Assert.assertTrue;
 

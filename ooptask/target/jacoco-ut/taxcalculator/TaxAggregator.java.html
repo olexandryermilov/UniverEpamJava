@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TaxAggregator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ooptask</a> &gt; <a href="index.source.html" class="el_package">taxcalculator</a> &gt; <span class="el_source">TaxAggregator.java</span></div><h1>TaxAggregator.java</h1><pre class="source lang-java linenums">package taxcalculator;
+
+import taxes.*;
+import taxes.PercentTax;
+
+import java.util.ArrayList;
+
+public class TaxAggregator {
+    private AuthorTax authorTax;
+    private CarTax carTax;
+    private GiftTax giftTax;
+    private IncomeTax mainIncomeTax,additionalIncomeTax;
+    private SoldRealEstateTax realEstateTax;
+    private TransferTax transferTax;
+<span class="nc" id="L15">    public TaxAggregator(){</span>
+<span class="nc" id="L16">        authorTax = new AuthorTax();</span>
+<span class="nc" id="L17">        carTax = new CarTax();</span>
+<span class="nc" id="L18">        giftTax = new GiftTax();</span>
+<span class="nc" id="L19">        mainIncomeTax = new IncomeTax(true);</span>
+<span class="nc" id="L20">        additionalIncomeTax = new IncomeTax(false);</span>
+<span class="nc" id="L21">        realEstateTax = new SoldRealEstateTax();</span>
+<span class="nc" id="L22">        transferTax = new TransferTax();</span>
+<span class="nc" id="L23">    }</span>
+    public AuthorTax getAuthorTax() {
+<span class="nc" id="L25">        return authorTax;</span>
+    }
+
+    public CarTax getCarTax() {
+<span class="nc" id="L29">        return carTax;</span>
+    }
+
+    public GiftTax getGiftTax() {
+<span class="nc" id="L33">        return giftTax;</span>
+    }
+
+    public IncomeTax getMainIncomeTax() {
+<span class="nc" id="L37">        return mainIncomeTax;</span>
+    }
+
+    public IncomeTax getAdditionalIncomeTax() {
+<span class="nc" id="L41">        return additionalIncomeTax;</span>
+    }
+
+    public SoldRealEstateTax getRealEstateTax() {
+<span class="nc" id="L45">        return realEstateTax;</span>
+    }
+
+    public TransferTax getTransferTax() {
+<span class="nc" id="L49">        return transferTax;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

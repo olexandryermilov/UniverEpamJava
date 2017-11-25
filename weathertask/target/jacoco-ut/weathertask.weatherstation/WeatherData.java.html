@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WeatherData.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">weathertask</a> &gt; <a href="index.source.html" class="el_package">weathertask.weatherstation</a> &gt; <span class="el_source">WeatherData.java</span></div><h1>WeatherData.java</h1><pre class="source lang-java linenums">package weathertask.weatherstation;
+
+import java.util.ArrayList;
+
+public class WeatherData {
+    private double temp;
+    private double humidity;
+    private double pressure;
+    private ArrayList&lt;Object&gt; main;
+
+<span class="nc" id="L11">    public WeatherData(double temp, double humidity, double pressure) {</span>
+<span class="nc" id="L12">        this.temp = temp;</span>
+<span class="nc" id="L13">        this.humidity = humidity;</span>
+<span class="nc" id="L14">        this.pressure = pressure;</span>
+<span class="nc" id="L15">    }</span>
+
+    private ArrayList&lt;Object&gt; base;
+
+<span class="nc" id="L19">    public WeatherData() {</span>
+<span class="nc" id="L20">    }</span>
+
+    public double getTemp() {
+<span class="nc" id="L23">        return temp;</span>
+    }
+
+    public double getHumidity() {
+<span class="nc" id="L27">        return humidity;</span>
+    }
+
+    public double getPressure() {
+<span class="nc" id="L31">        return pressure;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L36">        return &quot;WeatherData{&quot; +</span>
+                &quot;temp=&quot; + temp +
+                &quot;, humidity=&quot; + humidity +
+                &quot;, pressure=&quot; + pressure +
+                '}';
+    }
+
+    public ArrayList&lt;Object&gt; getMain() {
+<span class="nc" id="L44">        return main;</span>
+    }
+
+    public ArrayList&lt;Object&gt; getBase() {
+<span class="nc" id="L48">        return base;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

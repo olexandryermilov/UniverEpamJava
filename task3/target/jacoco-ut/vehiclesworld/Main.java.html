@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">task3</a> &gt; <a href="index.source.html" class="el_package">vehiclesworld</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package vehiclesworld;
+
+
+import vehiclesworld.Fabrics.VehiclesFabric;
+import vehiclesworld.vehicles.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+<span class="nc" id="L10">public class Main {</span>
+    private static CVehicle[] arr;
+    private static CVehicle[] getCheapestVehicles(){
+<span class="nc" id="L13">        CVehicle[] cheapest = new CVehicle[3];</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        for(CVehicle vehicle :arr){</span>
+<span class="nc" id="L15">            System.out.println(vehicle.getClass().getName());</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            if(vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CPlaneFabric&quot;)){</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">                if(cheapest[1]==null)cheapest[1]=vehicle;</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">                else if(cheapest[1].getCost()&gt;vehicle.getCost())cheapest[1]=vehicle;</span>
+            }
+            else {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">                if (vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CShipFabric&quot;)) {</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">                    if (cheapest[2] == null) cheapest[2] = vehicle;</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">                    else if (cheapest[2].getCost() &gt; vehicle.getCost()) cheapest[2] = vehicle;</span>
+                }
+                else{
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                    if(vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CCar&quot;)){</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">                        if(cheapest[0]==null)cheapest[0]=vehicle;</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                        else if(cheapest[0].getCost()&gt;vehicle.getCost())cheapest[0]=vehicle;</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L33">        return cheapest;</span>
+    }
+    private static CVehicle[] getFastestVehicles(){
+<span class="nc" id="L36">        CVehicle[] fastest = new CVehicle[3];</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for(CVehicle vehicle :arr){</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if(vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CPlaneFabric&quot;)){</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                if(fastest[1]==null)fastest[1]=vehicle;</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                else if(fastest[1].getSpeed()&lt;vehicle.getSpeed())fastest[1]=vehicle;</span>
+            }
+            else {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CShipFabric&quot;)) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                    if (fastest[2] == null) fastest[2] = vehicle;</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                    else if (fastest[2].getSpeed() &lt; vehicle.getSpeed()) fastest[2] = vehicle;</span>
+                }
+                else{
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                    if(vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CCar&quot;)){</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">                        if(fastest[0]==null)fastest[0]=vehicle;</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                        else if(fastest[0].getSpeed()&lt;vehicle.getSpeed())fastest[0]=vehicle;</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L55">        return fastest;</span>
+    }
+    private static ArrayList&lt;CVehicle&gt; getNewer(){
+<span class="nc" id="L58">        ArrayList&lt;CVehicle&gt;newer = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for(CVehicle vehicle: arr){</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if(2017-vehicle.getYear()&lt;=5)newer.add(vehicle);</span>
+        }
+<span class="nc" id="L62">        return newer;</span>
+    }
+    private static ArrayList&lt;CVehicle&gt; getPlanes(){
+<span class="nc" id="L65">        ArrayList&lt;CVehicle&gt; planes = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        for(CVehicle vehicle :arr){</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if(vehicle.getClass().getName().equals(&quot;vehiclesworld.vehicles.CPlaneFabric&quot;)){</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">                if(((CPlane)vehicle).getHeight()&gt;5000&amp;&amp;(vehicle).getYear()&gt;2000)planes.add(vehicle);</span>
+            }
+        }
+<span class="nc" id="L71">        return planes;</span>
+    }
+    private static ArrayList&lt;CVehicle&gt; getFast(){
+<span class="nc" id="L74">        ArrayList&lt;CVehicle&gt;fast = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        for(CVehicle vehicle :arr){</span>
+<span class="nc bnc" id="L76" title="All 6 branches missed.">            if (!(vehicle instanceof CPlane) &amp;&amp; vehicle.getSpeed() &lt;= 500 &amp;&amp; vehicle.getSpeed() &gt;= 200) fast.add(vehicle);</span>
+        }
+<span class="nc" id="L78">        return fast;</span>
+    }
+    private static ArrayList&lt;Flyable&gt; getFlyables(){
+<span class="nc" id="L81">        ArrayList&lt;Flyable&gt; flyables = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for(CVehicle vehicle:arr){</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if(vehicle instanceof Flyable)flyables.add((Flyable) vehicle);</span>
+        }
+<span class="nc" id="L85">        return flyables;</span>
+    }
+    private static ArrayList&lt;Moveable&gt; getMoveables(){
+<span class="nc" id="L88">        ArrayList&lt;Moveable&gt; moveables = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        for(CVehicle vehicle:arr){</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            if(vehicle instanceof Moveable)moveables.add((Moveable) vehicle);</span>
+        }
+<span class="nc" id="L92">        return moveables;</span>
+    }
+    private static ArrayList&lt;Swimable&gt; getSwimables(){
+<span class="nc" id="L95">        ArrayList&lt;Swimable&gt; swimables = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        for(CVehicle vehicle:arr){</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if(vehicle instanceof Swimable)swimables.add((Swimable) vehicle);</span>
+        }
+<span class="nc" id="L99">        return swimables;</span>
+    }
+    /*
+    1. механизмы с наименьшей ценой с наибольшей скоростью и не старше 5 лет
+    найти из механизмов Plane c с высотой полета выше 5000 с годом выпуска после 2000
+     найти механизмы с максимальной скоростью в диапазоне 200 - 500, но не Plane
+     добавить к данной иерархии машину-амфибию, и БетМобиль, создать 3 масива сгупированых по Интерфейсам Flyable, MoveAble, SwimAble
+     */
+    public static void main(String[] args) {
+<span class="nc" id="L108">        arr = new CVehicle[10];</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        for (int i = 0; i &lt; arr.length; i++) {</span>
+<span class="nc" id="L110">            arr[i]= VehiclesFabric.nextCVehicle();</span>
+        }
+<span class="nc" id="L112">        CVehicle[] fastest = getFastestVehicles();</span>
+<span class="nc" id="L113">        CVehicle[] cheapest = getCheapestVehicles();</span>
+<span class="nc" id="L114">        ArrayList&lt;CVehicle&gt; newer = getNewer();</span>
+<span class="nc" id="L115">        ArrayList&lt;CVehicle&gt; planes = getPlanes();</span>
+<span class="nc" id="L116">        ArrayList&lt;CVehicle&gt; fast = getFast();</span>
+<span class="nc" id="L117">        ArrayList&lt;Flyable&gt; flyables = getFlyables();</span>
+<span class="nc" id="L118">        ArrayList&lt;Moveable&gt; moveables = getMoveables();</span>
+<span class="nc" id="L119">        ArrayList&lt;Swimable&gt; swimables = getSwimables();</span>
+<span class="nc" id="L120">        System.out.println(Arrays.toString(fastest));</span>
+<span class="nc" id="L121">        System.out.println(Arrays.toString(cheapest));</span>
+<span class="nc" id="L122">        System.out.println(newer);</span>
+<span class="nc" id="L123">        System.out.println(planes);</span>
+<span class="nc" id="L124">        System.out.println(fast);</span>
+<span class="nc" id="L125">        System.out.println(flyables);</span>
+<span class="nc" id="L126">        System.out.println(moveables);</span>
+<span class="nc" id="L127">        System.out.println(swimables);</span>
+<span class="nc" id="L128">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
