@@ -4,7 +4,10 @@ import income.Income;
 import taxes.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
+import java.util.TreeMap;
+
 /*
 1.	Определить множество и сумму налоговых выплат физического лица за год с учетом доходов с основного
  и дополнительного мест работы, авторских вознаграждений, продажи имущества,
@@ -12,19 +15,47 @@ import java.util.Scanner;
    Провести сортировку налогов по сумме.
  */
 public class Calculator {
-    private static TaxAggregator taxAggregator;
-    private static ArrayList<Tax> taxes;
-    public static double calculateTaxes(Income income){
+    private ArrayList<TaxToShow> allTaxesValues;
+    public double calculateTaxes(Income income){
+        TaxAggregator taxAggregator = new TaxAggregator();
         double sumOfTaxes = 0;
-        taxAggregator=new TaxAggregator();
-        for(Tax tax: taxAggregator.getTaxes()){
-            if(tax in)
-        }
+        double taxToPay = taxAggregator.getAuthorTax().getMoneyToPay(income.getAuthorIncome());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Author tax",taxToPay));
+
+        taxToPay = taxAggregator.getCarTax().getMoneyToPay(income.getAmountOfCars());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Car tax",taxToPay));
+
+        taxToPay = taxAggregator.getAdditionalIncomeTax().getMoneyToPay(income.getAdditionalIncome());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Additional income tax",taxToPay));
+
+        taxToPay = taxAggregator.getMainIncomeTax().getMoneyToPay(income.getMainIncome());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Main income tax",taxToPay));
+
+        taxToPay = taxAggregator.getGiftTax().getMoneyToPay(income.getGiftIncome());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Gift tax",taxToPay));
+
+        taxToPay = taxAggregator.getRealEstateTax().getMoneyToPay(income.getRealEstateIncome());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Real estate income tax",taxToPay));
+
+        taxToPay = taxAggregator.getTransferTax().getMoneyToPay(income.getTransferIncome());
+        sumOfTaxes+=taxToPay;
+        allTaxesValues.add(new TaxToShow("Transfer tax",taxToPay));
+
         return sumOfTaxes;
     }
-    public static void main(String[] args){
-        taxAggregator = new TaxAggregator();
-        Income income = new Income();
-        System.out.println(calculateTaxes(income));
+
+    public Calculator() {
+        this.allTaxesValues =new ArrayList<>();
+    }
+
+    public ArrayList<TaxToShow> getAllTaxesValues() {
+        allTaxesValues.sort(Comparator.comparingDouble(TaxToShow::getMoney));
+        return allTaxesValues;
     }
 }

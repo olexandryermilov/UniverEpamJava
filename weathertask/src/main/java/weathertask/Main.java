@@ -27,27 +27,23 @@ public class Main {
         }
     }
     public static void main(String[] args){
-        Collection collection = new ArrayList();
-        collection.add("hello");
-        collection.add(5);
-        collection.add(new Event("GREETINGS", "guest"));
-        String json = new Gson().toJson(collection);
-        System.out.println("Using Gson.toJson() on a raw collection: " + json);
         CurrentConditionsDisplay currentConditionsDisplay = CurrentConditionsDisplay.getInstance();
         ForecastDisplay forecastDisplay = ForecastDisplay.getInstance();
         StatisticsDisplay statisticsDisplay = StatisticsDisplay.getInstance();
         WeatherStation ws = new WeatherStation();
+        ws.registerObserver(currentConditionsDisplay);
+        ws.registerObserver(forecastDisplay);
+        ws.registerObserver(statisticsDisplay);
         Scanner in = new Scanner(System.in);
         Date date=new Date();
         System.out.println("Enter 1 to see current conditions");
         System.out.println("Enter 2 to see forecast");
         System.out.println("Enter 3 to see statistics");
-        ws.measurementsChanged();
         System.out.println(ws);
         //System.exit(1);
         while (true) {
             if(new Date().getTime() % 10000 == 0){
-                ws.measurementsChanged();
+                if(!ws.measurementsChanged())continue;
                 System.out.println("Measurements changed");
                 currentConditionsDisplay.print();
                 forecastDisplay.print();

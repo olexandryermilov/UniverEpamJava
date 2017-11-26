@@ -6,22 +6,48 @@ import taxes.PercentTax;
 import java.util.ArrayList;
 
 public class TaxAggregator {
-
+    private AuthorTax authorTax;
+    private CarTax carTax;
+    private GiftTax giftTax;
+    private IncomeTax mainIncomeTax,additionalIncomeTax;
+    private SoldRealEstateTax realEstateTax;
+    private TransferTax transferTax;
     private ArrayList<Tax>taxes;
     public TaxAggregator(){
-        taxes.add(new AuthorTax());
-        taxes.add(new CarTax());
-        taxes.add(new GiftTax());
-        taxes.add(new IncomeTax(true));
-        taxes.add(new IncomeTax(false));
-        taxes.add(new SoldRealEstateTax());
-        taxes.add(new TransferTax());
+        authorTax = new AuthorTax();
+        carTax = new CarTax();
+        giftTax = new GiftTax();
+        mainIncomeTax = new IncomeTax(true);
+        additionalIncomeTax = new IncomeTax(false);
+        realEstateTax = new SoldRealEstateTax();
+        transferTax = new TransferTax();
     }
-    public ArrayList<Tax> getTaxes() {
-        return taxes;
+    public AuthorTax getAuthorTax() {
+        return authorTax;
     }
-    public void addTax(Tax tax){
-        taxes.add(tax);
+
+    public CarTax getCarTax() {
+        return carTax;
+    }
+
+    public GiftTax getGiftTax() {
+        return giftTax;
+    }
+
+    public IncomeTax getMainIncomeTax() {
+        return mainIncomeTax;
+    }
+
+    public IncomeTax getAdditionalIncomeTax() {
+        return additionalIncomeTax;
+    }
+
+    public SoldRealEstateTax getRealEstateTax() {
+        return realEstateTax;
+    }
+
+    public TransferTax getTransferTax() {
+        return transferTax;
     }
 
 }

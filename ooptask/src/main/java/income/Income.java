@@ -22,4 +22,32 @@ public class Income {
         this.realEstateIncome=toCopy.realEstateIncome;
         this.transferIncome=toCopy.transferIncome;
     }
+
+    public int getMainIncome() {
+        return mainIncome;
+    }
+
+    public int getAdditionalIncome() {
+        return additionalIncome;
+    }
+
+    public int getAuthorIncome() {
+        return authorIncome;
+    }
+
+    public int getAmountOfCars() {
+        return amountOfCars;
+    }
+
+    public int getGiftIncome() {
+        return giftIncome;
+    }
+
+    public int getRealEstateIncome() {
+        return realEstateIncome;
+    }
+
+    public int getTransferIncome() {
+        return transferIncome;
+    }
 }

@@ -16,7 +16,7 @@ public class CarTaxTest{
     @Test
     public void getMoneyToPay_CalculatesTax_PositiveIncome(){
         final int rightAnswer = 100;
-        double answer = carTax.getValueToPay();
+        double answer = carTax.getMoneyToPay(1);
         assertTrue(DoubleComparator.isEqual(rightAnswer,answer));
     }
 }
