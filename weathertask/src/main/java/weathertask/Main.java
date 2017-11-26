@@ -1,5 +1,6 @@
 package weathertask;
 
+import com.google.gson.Gson;
 import weathertask.apiwork.APIAdapter;
 import weathertask.displays.CurrentConditionsDisplay;
 import weathertask.displays.ForecastDisplay;
@@ -7,11 +8,31 @@ import weathertask.displays.StatisticsDisplay;
 import weathertask.weatherstation.WeatherStation;
 
 import java.net.Inet4Address;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
+    static class Event {
+        private String name;
+        private String source;
+        private Event(String name, String source) {
+            this.name = name;
+            this.source = source;
+        }
+        @Override
+        public String toString() {
+            return String.format("(name=%s, source=%s)", name, source);
+        }
+    }
     public static void main(String[] args){
+        Collection collection = new ArrayList();
+        collection.add("hello");
+        collection.add(5);
+        collection.add(new Event("GREETINGS", "guest"));
+        String json = new Gson().toJson(collection);
+        System.out.println("Using Gson.toJson() on a raw collection: " + json);
         CurrentConditionsDisplay currentConditionsDisplay = CurrentConditionsDisplay.getInstance();
         ForecastDisplay forecastDisplay = ForecastDisplay.getInstance();
         StatisticsDisplay statisticsDisplay = StatisticsDisplay.getInstance();

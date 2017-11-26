@@ -1,6 +1,6 @@
 package weathertasktest;
 
 public class MainTest {
-    @Test
-    public void
+    /*@Test
+    public void*/
 }

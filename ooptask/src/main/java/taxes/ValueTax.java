@@ -5,7 +5,7 @@ public abstract class ValueTax extends Tax {
     public ValueTax(double valueToPay){
         this.valueToPay=valueToPay;
     }
-    public double getValueToPay(){
-        return valueToPay;
+    public double getMoneyToPay(int amount){
+        return amount*valueToPay;
     }
 }
