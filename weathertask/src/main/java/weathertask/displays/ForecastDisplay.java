@@ -1,5 +1,6 @@
 package weathertask.displays;
 
+import weathertask.weatherstation.WeatherData;
 import weathertask.weatherstation.WeatherObserver;
 
 import java.util.Date;
@@ -9,10 +10,10 @@ public class ForecastDisplay implements WeatherObserver{
 
     private double futureTemperature,futureHumidity,futurePressure;
     final static Random random = new Random(new Date().getTime());
-    public void update(double newTemperature,double newHumidity, double newPressure) {
-        futureTemperature=newTemperature+(Integer.signum(random.nextInt())*(Math.abs(random.nextInt())%5));
-        futureHumidity=newHumidity+(Integer.signum(random.nextInt())*(Math.abs(random.nextInt())%5));
-        futurePressure=newPressure+(Integer.signum(random.nextInt())*(Math.abs(random.nextInt())%5));
+    public void update(WeatherData weatherData) {
+        futureTemperature=weatherData.getTemp()+(Integer.signum(random.nextInt())*(Math.abs(random.nextInt())%5));
+        futureHumidity=weatherData.getHumidity()+(Integer.signum(random.nextInt())*(Math.abs(random.nextInt())%5));
+        futurePressure=weatherData.getPressure()+(Integer.signum(random.nextInt())*(Math.abs(random.nextInt())%5));
     }
     private ForecastDisplay(){
     }
@@ -33,4 +34,5 @@ public class ForecastDisplay implements WeatherObserver{
                 ", futureHumidity=" + futureHumidity +
                 ", futurePressure=" + futurePressure ;
     }
+
 }

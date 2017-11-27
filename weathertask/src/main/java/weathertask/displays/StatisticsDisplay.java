@@ -1,14 +1,15 @@
 package weathertask.displays;
 
+import weathertask.weatherstation.WeatherData;
 import weathertask.weatherstation.WeatherObserver;
 
 public class StatisticsDisplay implements WeatherObserver {
     private double sumTemperature, sumHumidity,sumPressure;
     private int count;
-    public void update(double newTemperature,double newHumidity, double newPressure) {
-        sumTemperature+=newTemperature;
-        sumHumidity+=newHumidity;
-        sumPressure+=newPressure;
+    public void update(WeatherData weatherData) {
+        sumHumidity+=weatherData.getHumidity();
+        sumTemperature+=weatherData.getTemp();
+        sumPressure+=weatherData.getPressure();
         count++;
     }
     private StatisticsDisplay(){
@@ -27,7 +28,9 @@ public class StatisticsDisplay implements WeatherObserver {
     public void print(){
         System.out.println(this.toString());
     }
-
+    public WeatherData getFieldsAsWeatherData(){
+        return new WeatherData(sumTemperature,sumHumidity,sumPressure);
+    }
     @Override
     public String toString() {
         return "StatisticsDisplay:" +

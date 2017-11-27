@@ -47,16 +47,4 @@ public class WeatherData{
         return Double.compare(that.pressure, pressure) == 0;
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp1;
-        temp1 = Double.doubleToLongBits(temp);
-        result = (int) (temp1 ^ (temp1 >>> 32));
-        temp1 = Double.doubleToLongBits(humidity);
-        result = 31 * result + (int) (temp1 ^ (temp1 >>> 32));
-        temp1 = Double.doubleToLongBits(pressure);
-        result = 31 * result + (int) (temp1 ^ (temp1 >>> 32));
-        return result;
-    }
 }

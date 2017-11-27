@@ -1,13 +1,14 @@
 package weathertask.displays;
 
+import weathertask.weatherstation.WeatherData;
 import weathertask.weatherstation.WeatherObserver;
 
 public class CurrentConditionsDisplay implements Display, WeatherObserver {
     private double currentTemperature, currentHumidity, currentPressure;
-    public void update(double temperature,double humidity, double pressure) {
-        currentHumidity=humidity;
-        currentTemperature=temperature;
-        currentPressure=pressure;
+    public void update(WeatherData weatherData) {
+        currentHumidity=weatherData.getHumidity();
+        currentTemperature=weatherData.getTemp();
+        currentPressure=weatherData.getPressure();
     }
     private CurrentConditionsDisplay(){
     }
@@ -20,6 +21,9 @@ public class CurrentConditionsDisplay implements Display, WeatherObserver {
     }
     public void print(){
         System.out.println(this.toString());
+    }
+    public WeatherData getFieldsAsWeatherData(){
+        return new WeatherData(currentTemperature,currentHumidity,currentPressure);
     }
 
     @Override

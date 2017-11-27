@@ -11,11 +11,21 @@ import java.util.Observer;
 
 public class WeatherStation implements Subject {
     ///double temperature,humidity,pressure;
-    CurrentConditionsDisplay currentConditionsDisplay;
-    StatisticsDisplay statisticsDisplay;
-    ForecastDisplay forecastDisplay;
-    ArrayList<WeatherObserver>observers;
-    APIAdapter apiAdapter;
+    private CurrentConditionsDisplay currentConditionsDisplay;
+    private StatisticsDisplay statisticsDisplay;
+    private ForecastDisplay forecastDisplay;
+    private ArrayList<WeatherObserver>observers;
+
+    public void setApiAdapter(APIAdapter apiAdapter) {
+        this.apiAdapter = apiAdapter;
+    }
+
+    private APIAdapter apiAdapter;
+
+    public WeatherData getCurrentWeather() {
+        return currentWeather;
+    }
+
     private WeatherData currentWeather;
     public WeatherStation() {
         currentConditionsDisplay = CurrentConditionsDisplay.getInstance();
@@ -47,9 +57,9 @@ public class WeatherStation implements Subject {
     public void removeObserver(WeatherObserver observer){
         observers.remove(observer);
     }
-    public void notifyObservers(double newTemperature,double newHumidity, double newPressure){
+    public void notifyObservers(){
         for(WeatherObserver observer : observers){
-            observer.update(newTemperature, newHumidity, newPressure);
+            observer.update(currentWeather);
         }
     }
     public boolean measurementsChanged(){
@@ -61,13 +71,12 @@ public class WeatherStation implements Subject {
             System.out.println(e.getCause());
             return false;
         }
-        double temp = getTemperature();
-        double humidity = getHumidity();
-        double pressure = getPressure();
-        for(WeatherObserver observer: observers){
-            observer.update(temp,humidity,pressure);
-        }
+        notifyObservers();
         return true;
+    }
+
+    public ArrayList<WeatherObserver> getObservers() {
+        return observers;
     }
 
     @Override
