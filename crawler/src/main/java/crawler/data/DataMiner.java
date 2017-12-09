@@ -11,7 +11,12 @@ import java.util.regex.Pattern;
 public class DataMiner {
     private Data data;
     private final int sitesNumber = 30;
-    URLReader urlReader;
+
+    public void setUrlReader(URLReader urlReader) {
+        this.urlReader = urlReader;
+    }
+
+    private URLReader urlReader;
     public DataMiner(Data data){
         this.data=data;
         this.urlReader=new URLReader();
@@ -21,6 +26,7 @@ public class DataMiner {
         urls.add(startUrl);
         for (int i = 0; i < Math.min(urls.size(),sitesNumber); i++) {
             String url = urls.get(i);
+            System.out.println(url);
             Parser parser = new Parser(urlReader.readURL(url));
             ArrayList<String> urlsAtUrlPage = parser.getAllUrls();
             for (String urlAtPage : urlsAtUrlPage) {
@@ -30,7 +36,7 @@ public class DataMiner {
             }
             String[] wordsAtUrlPage = parser.getAllWords();
             for (int j = 0; j < wordsAtUrlPage.length; j++) {
-                if(!checkIsStringIsWord(wordsAtUrlPage[j]))continue;
+                if(!checkIfStringIsWord(wordsAtUrlPage[j]))continue;
                 System.out.println(wordsAtUrlPage[j]);
                 if (!data.getWordFrequency().containsKey(wordsAtUrlPage[j])) {
                     data.getWordFrequency().put(wordsAtUrlPage[j], new TreeMap<>());
@@ -40,9 +46,13 @@ public class DataMiner {
             }
         }
     }
-    public boolean checkIsStringIsWord(String word){
+    public boolean checkIfStringIsWord(String word){
         Pattern pattern =Pattern.compile("[A-Z]?[a-z]+");
         Matcher matcher = pattern.matcher(word);
         return (matcher.find()&&matcher.group().equals(word));
+    }
+
+    public Data getData() {
+        return data;
     }
 }
