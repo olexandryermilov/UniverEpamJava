@@ -1,5 +1,7 @@
 package jdbctask;
 
+import jdbctask.exceptions.WrongArgumentException;
+import jdbctask.exceptions.WrongCommandException;
 import jdbctask.processor.DatabaseConnector;
 import jdbctask.processor.Processor;
 
@@ -29,7 +31,14 @@ public class Main {
             Processor processor = new Processor(con);
             while(true){
                 String line = in.nextLine();
-                int response =processor.workWithCommand(line);
+                int response = 0;
+                try {
+                    response = processor.workWithCommand(line);
+                } catch (WrongCommandException e) {
+                    System.out.println("Wrong command. Type help to see usage.");
+                } catch (WrongArgumentException e) {
+                    System.out.println("Wrong arguments.");
+                }
                 if(response==-1)break;
 
             }

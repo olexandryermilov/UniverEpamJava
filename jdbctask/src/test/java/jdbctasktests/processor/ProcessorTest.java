@@ -2,6 +2,8 @@ package jdbctasktests.processor;
 
 import jdbctask.data.Railway;
 import jdbctask.data.Station;
+import jdbctask.exceptions.WrongArgumentException;
+import jdbctask.exceptions.WrongCommandException;
 import jdbctask.processor.DatabaseConnector;
 import jdbctask.processor.Processor;
 import org.junit.BeforeClass;
@@ -23,7 +25,7 @@ public class ProcessorTest {
         processor=new Processor(connection);
     }
     @Test
-    public void addToRailway() throws SQLException {
+    public void addToRailway() throws SQLException, WrongCommandException, WrongArgumentException {
         processor.removeRailway("1000000");
         processor.workWithCommand("add railway 1000000 railway");
         ArrayList<Railway>rightAnswer = new ArrayList<>();
@@ -32,7 +34,7 @@ public class ProcessorTest {
 
     }
     @Test
-    public void addToStation() throws SQLException {
+    public void addToStation() throws SQLException, WrongCommandException, WrongArgumentException {
         processor.removeStation("1000000");
         processor.workWithCommand("add station 1000000 4 station");
         ArrayList<Station>rightAnswer = new ArrayList<>();
@@ -40,8 +42,28 @@ public class ProcessorTest {
         assertEquals(rightAnswer,processor.searchStation("ID=1000000 STATIONNAME='station'"));
     }
     @Test
-    public void exit() throws SQLException {
+    public void exit() throws SQLException, WrongCommandException, WrongArgumentException {
         assertEquals(-1,processor.workWithCommand("exit"));
+    }
+    @Test(expected = WrongCommandException.class)
+    public void worksWithWrongCommandException() throws SQLException, WrongCommandException, WrongArgumentException {
+        processor.workWithCommand("hell");
+    }
+    @Test(expected = WrongArgumentException.class)
+    public void worksWithWrongArgumentException() throws SQLException, WrongCommandException, WrongArgumentException {
+        processor.workWithCommand("search railway ID=fsdfsdf");
+    }
+    @Test(expected = WrongArgumentException.class)
+    public void worksWithAddWrongArgumentException() throws SQLException, WrongCommandException, WrongArgumentException {
+        processor.workWithCommand("add railway fsdfsdf fadfs");
+    }
+    @Test(expected = WrongArgumentException.class)
+    public void worksWithRemoveWrongArgumentException() throws SQLException, WrongCommandException, WrongArgumentException {
+        processor.workWithCommand("remove station fdsds");
+    }
+    @Test(expected = WrongArgumentException.class)
+    public void worksWithRemoveRailwayWrongArgumentException() throws SQLException, WrongCommandException, WrongArgumentException {
+        processor.workWithCommand("remove railway fdsds");
     }
 
 }

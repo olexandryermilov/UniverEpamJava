@@ -2,6 +2,8 @@ package jdbctask.processor;
 
 import jdbctask.data.Railway;
 import jdbctask.data.Station;
+import jdbctask.exceptions.WrongArgumentException;
+import jdbctask.exceptions.WrongCommandException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +26,9 @@ public class Processor {
     private PreparedStatement addStationStatement;
     private PreparedStatement removeRailwayStatement;
     private PreparedStatement removeStationStatement;
-    private PreparedStatement searchRailwayStatement;
-    private PreparedStatement searchStationStatement;
+    private final String helpMessage="Usage:\nexit to quit the app\nadd railway id name\n" +
+            "add station id r_id stationname\nremove railway id\nremove station id\n"+
+            "search railway [ID=id NAME=name]\nsearch station [ID=id R_ID=id STATIONNAME=stationname]";
     private void prepareStatements() throws SQLException {
         addRailwayStatement=connection.prepareStatement("INSERT INTO railway.railways VALUES (?,?)");
         addStationStatement=connection.prepareStatement("INSERT INTO railway.stations VALUES (?,?,?)");
@@ -41,16 +44,19 @@ public class Processor {
         }
     }
 
-    public int workWithCommand(String text) throws SQLException {
+    public int workWithCommand(String text) throws SQLException, WrongCommandException, WrongArgumentException {
         String[] arr = text.split(" ");
         if(arr.length==1){
             if (arr[0].equalsIgnoreCase("help")) {
-
+                System.out.println(helpMessage);
+                return 0;
             }
             if (arr[0].equalsIgnoreCase("exit")) {
                 return -1;
             }
-            return 0;
+            else{
+                throw new WrongCommandException();
+            }
         }
         String withoutFirstWord=text.substring(arr[0].length()+1);
         if(arr[0].equalsIgnoreCase("add")){
@@ -63,13 +69,13 @@ public class Processor {
             } else if (arr[0].equalsIgnoreCase("search")) {
                 searchObject(withoutFirstWord);
             } else {
-                ///throw smth at me;
+                throw new WrongCommandException();
             }
         }
         return 0;
 
     }
-    public void addObject(String text) throws SQLException {
+    public void addObject(String text) throws SQLException, WrongArgumentException, WrongCommandException {
         String[] arr = text.split(" ");
         String withoutFirstWord=text.substring(arr[0].length()+1);
         if(arr[0].equalsIgnoreCase("railway")){
@@ -80,22 +86,22 @@ public class Processor {
                 addStation(withoutFirstWord);
             }
             else{
-                //throw smth;
+                throw new WrongArgumentException();
             }
         }
     }
 
-    public void addRailway(String text) throws SQLException {
+    public void addRailway(String text) throws SQLException, WrongCommandException, WrongArgumentException {
         String[] arr = text.split(" ");
         if(arr.length!=2){
-            //throw
+            throw new WrongCommandException();
         }
         int id = 1;
         try{
             id = Integer.parseInt(arr[0]);
         }
         catch (Exception e){
-            //
+            throw new WrongArgumentException();
         }
         text=arr[1];
         addRailwayStatement.setInt(1,id);
@@ -121,7 +127,7 @@ public class Processor {
         addStationStatement.setString(3,text);
         addStationStatement.executeUpdate();
     }
-    public void removeObject(String text) throws SQLException {
+    public void removeObject(String text) throws SQLException, WrongArgumentException {
         String[] arr = text.split(" ");
         String withoutFirstWord=text.substring(arr[0].length()+1);
         if(arr[0].equalsIgnoreCase("railway")){
@@ -132,41 +138,41 @@ public class Processor {
                 removeStation(withoutFirstWord);
             }
             else{
-                //throw smth;
+                throw new WrongArgumentException();
             }
         }
     }
-    public void removeRailway(String text) throws SQLException {
+    public void removeRailway(String text) throws SQLException, WrongArgumentException {
         String arr[] = text.split(" ");
         if(arr.length!=1){
-            //
+            throw new WrongArgumentException();
         }
         int id = 1;
         try{
              id = Integer.parseInt(arr[0]);
         }
         catch (Exception e){
-
+            throw new WrongArgumentException();
         }
         removeRailwayStatement.setInt(1,id);
         removeRailwayStatement.executeUpdate();
     }
-    public void removeStation(String text) throws SQLException {
+    public void removeStation(String text) throws SQLException, WrongArgumentException {
         String arr[] = text.split(" ");
         if(arr.length!=1){
-            //
+            throw new WrongArgumentException();
         }
         int id = 1;
         try{
             id = Integer.parseInt(arr[0]);
         }
         catch (Exception e){
-
+            throw new WrongArgumentException();
         }
         removeStationStatement.setInt(1,id);
         removeStationStatement.executeUpdate();
     }
-    public void searchObject(String text) throws SQLException {
+    public void searchObject(String text) throws SQLException, WrongArgumentException {
         String[] arr = text.split(" ");
         String withoutFirstWord=text.substring(arr[0].length()+1);
         if(arr[0].equalsIgnoreCase("railway")){
@@ -177,15 +183,18 @@ public class Processor {
                 System.out.println(searchStation(withoutFirstWord));
             }
             else{
-                //throw smth;
+                throw new WrongArgumentException();
             }
         }
     }
-    public ArrayList<Railway> searchRailway(String text) throws SQLException {
+    public ArrayList<Railway> searchRailway(String text) throws SQLException, WrongArgumentException {
         StringBuilder statement = new StringBuilder();
         statement.append("SELECT * FROM railway.railways");
         if (text.length() != 0) {
             statement.append(" WHERE ");
+        }
+        else{
+            throw new WrongArgumentException();
         }
         String[] arr = text.split(" ");
         if (arr[0].startsWith("ID")) {
@@ -193,7 +202,7 @@ public class Processor {
             try {
                 id = Integer.parseInt(arr[0].replaceAll("ID", "").substring(1));
             } catch (Exception e) {
-
+                throw new WrongArgumentException();
             }
             statement.append(arr[0]);
         }
@@ -206,6 +215,7 @@ public class Processor {
                     name=arr[1];
                 }
                 else{
+                    throw new WrongArgumentException();
                 }
             }
         }
@@ -223,11 +233,14 @@ public class Processor {
         }
         return queryAnswer;
     }
-    public ArrayList<Station> searchStation(String text)throws SQLException{
+    public ArrayList<Station> searchStation(String text) throws SQLException, WrongArgumentException {
         StringBuilder statement = new StringBuilder();
         statement.append("SELECT * FROM railway.stations");
         if (text.length() != 0) {
             statement.append(" WHERE ");
+        }
+        else{
+            throw new WrongArgumentException();
         }
         String[] arr = text.split(" ");
         String id = null;
@@ -262,6 +275,10 @@ public class Processor {
                         if(arr[2].startsWith("STATIONNAME=")){
                             name=arr[2];
                         }
+                    }
+                    else
+                    {
+                        throw new WrongArgumentException();
                     }
                 }
             }
