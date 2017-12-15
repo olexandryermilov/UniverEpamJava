@@ -9,7 +9,15 @@ public class Ivanov implements Runnable {
     @Override
     public void run() {
         while(true){
-            q.put(new Good());
+            Good g=new Good();
+            System.out.println("Ivanov took "+g+" from base");
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+
+            }
+            q.put(g);
+            System.out.println("Ivanov given "+g+"to Petrov");
         }
     }
 }

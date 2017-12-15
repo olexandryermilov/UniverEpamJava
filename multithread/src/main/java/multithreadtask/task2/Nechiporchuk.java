@@ -9,7 +9,14 @@ public class Nechiporchuk implements Runnable{
     @Override
     public void run() {
         while(true){
-            q.getCost();
+            Good g = q.get();
+            System.out.println("Nechiporchuk accepted "+g+" from Petrov");
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Nechiporchuk: cost equals "+g.getValue());
         }
     }
 }

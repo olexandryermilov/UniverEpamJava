@@ -15,8 +15,7 @@ public class Queue {
                 e.printStackTrace();
             }
         }
-        state=2;
-        System.out.println("Petrov has taken "+good);
+        state=0;
         notify();
         notifyAll();
         return good;
@@ -31,22 +30,8 @@ public class Queue {
         }
         state=1;
         this.good=good;
-        System.out.println("Ivanov has put "+good);
         notify();
         notifyAll();
     }
-    synchronized int getCost(){
-        while(state!=2){
-            try{
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        state = 0;
-        System.out.println("Necheporchuk got the cost : "+good.getValue());
-        notify();
-        notifyAll();
-        return good.getValue();
-    }
+
 }

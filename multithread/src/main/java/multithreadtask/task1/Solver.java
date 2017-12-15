@@ -7,30 +7,25 @@ import java.util.Queue;
 
 public class Solver {
 
-    public synchronized boolean isFound() {
+    public boolean isFound() {
         return isFound;
     }
 
-    public synchronized void setFound(boolean found) {
+    public void setFound(boolean found) {
         isFound = found;
     }
     private int winnieX;
     private int winnieY;
-    private int sizeX=50,sizeY=50;
-    private volatile boolean isFound;
+    private int sizeX=5,sizeY=5;
+    private boolean isFound;
     private int bees=10;
     private Queue<Task> tasks;
     public LinkedList<Task> initTasks(){
         LinkedList<Task> rtasks = new LinkedList<>();
-        for(int i=0;i<10000;i++){
+        for(int i=0;i<100;i++){
             int x= (int) ((i+new Date().getTime())%sizeX);
             int y= (int) ((((i+new Date().getTime())%sizeY)*((new Date().getTime()+i)%(sizeX+3)))%sizeY);
             Task task = new Task(x,y,i);
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             rtasks.add(task);
         }
         return rtasks;
