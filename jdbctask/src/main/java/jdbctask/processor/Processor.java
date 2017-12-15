@@ -80,10 +80,12 @@ public class Processor {
         String withoutFirstWord=text.substring(arr[0].length()+1);
         if(arr[0].equalsIgnoreCase("railway")){
             addRailway(withoutFirstWord);
+            System.out.println("Railway added");
         }
         else{
             if(arr[0].equalsIgnoreCase("station")){
                 addStation(withoutFirstWord);
+                System.out.println("Station added");
             }
             else{
                 throw new WrongArgumentException();
@@ -132,10 +134,12 @@ public class Processor {
         String withoutFirstWord=text.substring(arr[0].length()+1);
         if(arr[0].equalsIgnoreCase("railway")){
             removeRailway(withoutFirstWord);
+            System.out.println("Railway removed");
         }
         else{
             if(arr[0].equalsIgnoreCase("station")){
                 removeStation(withoutFirstWord);
+                System.out.println("Station removed");
             }
             else{
                 throw new WrongArgumentException();
